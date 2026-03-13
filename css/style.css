@@ -806,9 +806,6 @@ body.home-page {
 }
 
 /* No ads on homepage */
-body.home-page .ad-side {
-  display: none !important;
-}
 
 body.home-page main.arcade-main {
   flex: 1 1 auto;
@@ -1354,6 +1351,12 @@ body.game-page {
   border-radius: 4px;
   border: 1px solid rgba(255, 230, 0, 0.35);
   flex-shrink: 0;
+}
+
+@media (min-width: 769px) {
+  .keys-annotation .mobile-hint {
+    display: none;
+  }
 }
 
 /* Tetris: layout 360×720, arcade frame (same style as Flappy) — colors stay visible */

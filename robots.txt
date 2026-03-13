@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://play90sarcade.in/sitemap.xml
+Sitemap: https://rakeshkirupa.github.io/play90sarcade/sitemap.xml

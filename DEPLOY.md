@@ -4,7 +4,7 @@ Before going live, do this once:
 
 1. **Set your domain**  
    Find and replace in all HTML files and in `robots.txt`, `sitemap.xml`:
-   - Domain is set to `https://play90sarcade.in` (already applied in this project).
+   - Domain is set to `https://rakeshkirupa.github.io/play90sarcade/` for GitHub Pages / Google Ads.
 
 2. **Contact email**  
    In `contact.html`, replace `your-email@example.com` with your real contact email.

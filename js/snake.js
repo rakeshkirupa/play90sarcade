@@ -345,5 +345,34 @@
   bestEl.textContent = getSessionBest();
   startGame();
 
+  /* Mobile: swipe on game canvas = direction change */
+  var touchStart = null;
+  if (canvas) {
+    canvas.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) return;
+      if (overlay && !overlay.classList.contains('hidden')) return;
+      touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }, { passive: true });
+    canvas.addEventListener('touchend', function (e) {
+      if (!touchStart || e.changedTouches.length !== 1) return;
+      if (overlay && !overlay.classList.contains('hidden')) return;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - touchStart.x;
+      var dy = t.clientY - touchStart.y;
+      touchStart = null;
+      var min = 40;
+      if (Math.abs(dx) >= min || Math.abs(dy) >= min) {
+        e.preventDefault();
+        if (Math.abs(dx) > Math.abs(dy)) {
+          if (dx > 0) { setDirection(1, 0); if (typeof window.playButtonSound === 'function') window.playButtonSound(); }
+          else { setDirection(-1, 0); if (typeof window.playButtonSound === 'function') window.playButtonSound(); }
+        } else {
+          if (dy < 0) { setDirection(0, -1); if (typeof window.playButtonSound === 'function') window.playButtonSound(); }
+          else { setDirection(0, 1); if (typeof window.playButtonSound === 'function') window.playButtonSound(); }
+        }
+      }
+    }, { passive: false });
+  }
+
   window.__snakeRestart = startGame;
 })();

@@ -273,14 +273,27 @@
     if (e.key === 'ArrowRight') { e.preventDefault(); paddleX = Math.min(W - PADDLE_W, paddleX + 58); draw(); }
   });
 
-  document.addEventListener('mousemove', function(e) {
+  function setPaddleFromClientX(clientX) {
     if (!running || !canvas) return;
     var rect = canvas.getBoundingClientRect();
     if (!rect.width || !rect.height) return;
     var scale = canvas.width / rect.width;
-    var x = (e.clientX - rect.left) * scale;
+    var x = (clientX - rect.left) * scale;
     paddleX = Math.max(0, Math.min(W - PADDLE_W, x - PADDLE_W/2));
+  }
+
+  document.addEventListener('mousemove', function(e) {
+    setPaddleFromClientX(e.clientX);
   });
+
+  canvas.addEventListener('touchmove', function(e) {
+    if (e.touches.length !== 1) return;
+    setPaddleFromClientX(e.touches[0].clientX);
+    e.preventDefault();
+  }, { passive: false });
+  canvas.addEventListener('touchstart', function(e) {
+    if (e.touches.length === 1) setPaddleFromClientX(e.touches[0].clientX);
+  }, { passive: true });
 
   playAgainBtn.addEventListener('click', startGame);
   if (retryBtn) retryBtn.addEventListener('click', retryRound);

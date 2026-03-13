@@ -47,6 +47,6 @@ See **SECURITY.md** for details and DDoS/hosting guidance.
 - **SEO:** Each page has `<meta name="description">`, `<meta name="keywords">`, canonical URL, and Open Graph tags.
 - **Favicon:** `favicon.png` in the project root (neon “A” on dark background). Linked on every page.
 
-**Domain:** The site is configured for `https://play90sarcade.in` (canonical, `og:url`, `og:image`, sitemap, robots.txt). Change these if you use a different domain.
+**Domain:** The site is configured for `https://rakeshkirupa.github.io/play90sarcade/` (canonical, `og:url`, `og:image`, sitemap, robots.txt) for Google Ads submission.
 
 Made for 90s kids.

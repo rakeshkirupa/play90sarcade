@@ -9,7 +9,10 @@
   const CELL = 36;
   const W = COLS * CELL;
   const H = ROWS * CELL;
+  const FRAME = 10; /* unplayable border (like Flappy ground/sky) */
   const BEST_KEY = 'tetrisBest';
+  const FRAME_COLOR = '#1a1a2a';   /* unplayable area */
+  const PLAY_BG = '#0a0a12';      /* play area */
 
   const SHAPES = [
     [[1,1,1,1]],
@@ -187,8 +190,20 @@
     ctx.fillRect(px, py, 2, s);
   }
   function draw() {
-    ctx.fillStyle = '#0a0a12';
+    var cw = canvas.width, ch = canvas.height;
+    ctx.fillStyle = FRAME_COLOR;
+    ctx.fillRect(0, 0, cw, ch);
+    var scale = Math.min((cw - 2 * FRAME) / W, (ch - 2 * FRAME) / H);
+    var drawW = W * scale, drawH = H * scale;
+    var offsetX = (cw - drawW) / 2, offsetY = (ch - drawH) / 2;
+    ctx.save();
+    ctx.translate(offsetX, offsetY);
+    ctx.scale(scale, scale);
+    ctx.fillStyle = PLAY_BG;
     ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(0, 212, 255, 0.35)';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(0, 0, W, H);
     for (var r = 0; r < ROWS; r++) {
       for (var c = 0; c < COLS; c++) {
         if (grid[r][c]) drawBlock(c * CELL, r * CELL, grid[r][c]);
@@ -204,6 +219,7 @@
         }
       }
     }
+    ctx.restore();
   }
 
   function gameOver() {
@@ -284,6 +300,36 @@
 
   if (bestEl) bestEl.textContent = getBest();
   window.__tetrisRestart = startGame;
+
+  /* Mobile: swipe on game canvas = move / rotate / soft drop */
+  var touchStart = null;
+  if (canvas) {
+    canvas.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) return;
+      if (overlay && !overlay.classList.contains('hidden')) return;
+      touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }, { passive: true });
+    canvas.addEventListener('touchend', function (e) {
+      if (!touchStart || e.changedTouches.length !== 1) return;
+      if (overlay && !overlay.classList.contains('hidden')) return;
+      var t = e.changedTouches[0];
+      var dx = t.clientX - touchStart.x;
+      var dy = t.clientY - touchStart.y;
+      touchStart = null;
+      var min = 40;
+      if (Math.abs(dx) >= min || Math.abs(dy) >= min) {
+        e.preventDefault();
+        if (Math.abs(dx) > Math.abs(dy)) {
+          if (dx > 0) move(1);
+          else move(-1);
+        } else {
+          if (dy < 0) rotate();
+          else { if (piece) { score += level; if (scoreEl) scoreEl.textContent = score; } tick(); resetInterval(); }
+        }
+      }
+    }, { passive: false });
+  }
+
   /* Start after canvas is laid out so pieces render reliably */
   function init() {
     startGame();
