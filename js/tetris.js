@@ -309,6 +309,10 @@
       if (overlay && !overlay.classList.contains('hidden')) return;
       touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     }, { passive: true });
+    canvas.addEventListener('touchmove', function (e) {
+      if (touchStart !== null && e.touches.length === 1) e.preventDefault();
+    }, { passive: false });
+    canvas.addEventListener('touchcancel', function () { touchStart = null; });
     canvas.addEventListener('touchend', function (e) {
       if (!touchStart || e.changedTouches.length !== 1) return;
       if (overlay && !overlay.classList.contains('hidden')) return;
