@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'self'; form-action 'self';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <title>Flappy Bird — Retro 90s Games</title>
+  <meta name="description" content="Play Flappy Bird online. Arcade flying challenge in your browser. Part of Retro 90s Games.">
+  <meta name="keywords" content="flappy bird, arcade game, flying game, retro games, free online games">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://play90sarcade.in/flappy.html">
+  <meta property="og:title" content="Flappy Bird — Retro 90s Games">
+  <meta property="og:description" content="Play Flappy Bird. Arcade flying challenge in your browser.">
+  <meta property="og:url" content="https://play90sarcade.in/flappy.html">
+  <meta name="theme-color" content="#0f0f1a">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="snake-page game-page site-has-footer" data-game="Flappy Bird">
+  <div class="bg-animations" aria-hidden="true">
+    <div class="pixel-blocks"></div>
+    <div class="tetris-shapes"></div>
+    <div class="stars"></div>
+    <div class="geo-shapes"></div>
+  </div>
+
+  <div class="snake-layout">
+    <div class="ad-side ad-side-left" role="presentation"><span>Google Ad</span></div>
+    <div class="snake-wrapper">
+      <a href="index.html" class="back-link">← BACK TO GAMES</a>
+      <h1 class="snake-title arcade-game-title">FLAPPY BIRD</h1>
+      <div class="score-row arcade-scores">
+        <span class="score-label score-current">SCORE <span id="score">0</span></span>
+        <span class="score-label score-high">BEST <span id="best">0</span></span>
+      </div>
+      <div class="game-container game-container-flappy">
+        <canvas id="gameCanvas" width="400" height="600"></canvas>
+        <div id="gameOverOverlay" class="game-over-overlay hidden">
+          <div class="game-over-box arcade-gameover">
+            <div id="newHighScoreBanner" class="new-high-score-banner hidden">NEW HIGH SCORE! ★</div>
+            <h2>GAME OVER</h2>
+            <p>SCORE <span id="finalScore">0</span></p>
+            <p>BEST <span id="finalBest">0</span></p>
+            <button type="button" id="playAgainBtn" class="btn-play-again" aria-label="Play again">PLAY AGAIN</button>
+            <p class="hint">SPACE TO RESTART</p>
+          </div>
+        </div>
+      </div>
+      <p class="keys-annotation">SPACE or tap to flap</p>
+    </div>
+    <div class="ad-side ad-side-right" role="presentation"><span>Google Ad</span></div>
+  </div>
+
+  <footer class="site-footer site-footer-content site-footer-games">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    <p class="footer-tagline">Made for 90s kids who love classic games.</p>
+  </footer>
+
+  <script src="js/security.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/sounds.js"></script>
+  <script src="js/keyboard-feedback.js"></script>
+  <script src="js/flappy.js"></script>
+  <script src="js/game-over-restart.js"></script>
+  <script src="js/entering-game.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; base-uri 'self'; form-action 'self';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <title>Retro 90s Games — Play Snake, Tetris, Brick Breaker &amp; More</title>
+  <meta name="description" content="Play free classic 90s games in your browser: Snake, Tetris, Brick Breaker, Hangman, Memory. Nostalgic retro arcade games for everyone.">
+  <meta name="keywords" content="90s games, retro games, snake game, tetris, brick breaker, hangman, memory game, free online games, classic games, arcade games">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://play90sarcade.in/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Retro 90s Games — Play Classic Games">
+  <meta property="og:description" content="Play free classic 90s games: Snake, Tetris, Brick Breaker, Hangman, Memory. Nostalgic retro arcade in your browser.">
+  <meta property="og:url" content="https://play90sarcade.in/">
+  <meta property="og:image" content="https://play90sarcade.in/favicon.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Retro 90s Games">
+  <meta name="twitter:description" content="Play free classic 90s games in your browser.">
+  <meta name="theme-color" content="#0f0f1a">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="home-page">
+  <div class="bg-animations" aria-hidden="true">
+    <div class="pixel-blocks"></div>
+    <div class="tetris-shapes"></div>
+    <div class="stars"></div>
+    <div class="geo-shapes"></div>
+  </div>
+
+  <header class="site-header site-header-arcade">
+    <div class="logo logo-cabinet">ARCADE</div>
+    <div class="header-sub header-insert-coin">INSERT COIN</div>
+    <div class="header-player">1 PLAYER</div>
+  </header>
+
+  <main class="arcade-main">
+    <div class="arcade-crt">
+      <h1 class="arcade-title">SELECT GAME</h1>
+      <p class="arcade-tagline">PRESS START · CHOOSE YOUR GAME</p>
+      <p class="arcade-era">90s FOREVER</p>
+
+      <section class="games-list-primary">
+        <div class="games-grid arcade-grid">
+        <a href="snake.html" class="game-card arcade-card playable" aria-label="Play Snake game">
+          <span class="game-card-marquee">SNAKE</span>
+          <span class="game-card-icon">🐍</span>
+          <h2 class="game-card-name">SNAKE</h2>
+          <span class="game-card-btn">START GAME</span>
+        </a>
+        <a href="tetris.html" class="game-card arcade-card playable" aria-label="Play Tetris game">
+          <span class="game-card-marquee">TETRIS</span>
+          <span class="game-card-icon">🧱</span>
+          <h2 class="game-card-name">TETRIS</h2>
+          <span class="game-card-btn">START GAME</span>
+        </a>
+        <a href="brick-breaker.html" class="game-card arcade-card playable" aria-label="Play Brick Breaker game">
+          <span class="game-card-marquee">BRICK BREAKER</span>
+          <span class="game-card-icon">🔨</span>
+          <h2 class="game-card-name">BRICK BREAKER</h2>
+          <span class="game-card-btn">START GAME</span>
+        </a>
+        <a href="hangman.html" class="game-card arcade-card playable" aria-label="Play Hangman game">
+          <span class="game-card-marquee">HANGMAN</span>
+          <span class="game-card-icon">📝</span>
+          <h2 class="game-card-name">HANGMAN</h2>
+          <span class="game-card-btn">START GAME</span>
+        </a>
+        <a href="memory.html" class="game-card arcade-card playable" aria-label="Play Memory game">
+          <span class="game-card-marquee">MEMORY</span>
+          <span class="game-card-icon">🎴</span>
+          <h2 class="game-card-name">MEMORY</h2>
+          <span class="game-card-btn">START GAME</span>
+        </a>
+        <a href="flappy.html" class="game-card arcade-card playable" aria-label="Play Flappy Bird game">
+          <span class="game-card-marquee">FLAPPY BIRD</span>
+          <span class="game-card-icon">🐦</span>
+          <h2 class="game-card-name">FLAPPY BIRD</h2>
+          <span class="game-card-btn">START GAME</span>
+        </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer site-footer-arcade">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="contact.html">Contact</a>
+      <a href="terms.html">Terms</a>
+    </nav>
+    <p class="footer-tagline">Made for 90s kids who love classic games.</p>
+    <p class="footer-copy">INSERT COIN TO CONTINUE · © 199X</p>
+  </footer>
+
+  <script src="js/security.js"></script>
+  <script src="js/sounds.js"></script>
+  <script src="js/animations.js"></script>
+  <script>
+    (function() {
+      var played = false;
+      function playHomepageSound() {
+        if (window.playHomepageTheme) window.playHomepageTheme();
+        if (window.startHomepageAmbience) window.startHomepageAmbience();
+      }
+      function onFirstInteraction() {
+        if (played) return;
+        played = true;
+        playHomepageSound();
+        document.removeEventListener('click', onFirstInteraction);
+        document.removeEventListener('keydown', onFirstInteraction);
+        document.removeEventListener('touchstart', onFirstInteraction);
+      }
+      document.addEventListener('click', onFirstInteraction);
+      document.addEventListener('keydown', onFirstInteraction);
+      document.addEventListener('touchstart', onFirstInteraction);
+      if (window.tryResumeAndRun) {
+        window.tryResumeAndRun(function() {
+          playHomepageSound();
+        });
+      } else {
+        setTimeout(playHomepageSound, 150);
+      }
+    })();
+  </script>
+</body>
+</html>

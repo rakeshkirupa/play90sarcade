@@ -1,0 +1,2018 @@
+/* ============================================
+   90s ARCADE — Retro Nostalgia Styles
+   Color palette & pixel font
+   ============================================ */
+:root {
+  --bg: #0f0f1a;
+  --neon-blue: #00d4ff;
+  --retro-pink: #ff007f;
+  --arcade-purple: #6a00ff;
+  --yellow: #ffe600;
+  --font-pixel: 'Press Start 2P', cursive;
+  --font-body: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --lcd-bg: #9bbc0f;
+  --lcd-snake: #0f380f;
+  --lcd-grid: #8bac0f;
+  --lcd-food: #8b2500;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  height: 100%;
+  overflow-x: hidden;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-pixel);
+  background: var(--bg);
+  color: #fff;
+  min-height: 100%;
+  overflow-x: hidden;
+  font-size: 1rem;
+}
+
+/* ============================================
+   Background animation layers
+   ============================================ */
+.bg-animations {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.pixel-blocks {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle 4px at 10% 20%, var(--neon-blue) 0%, transparent 100%),
+    radial-gradient(circle 4px at 80% 60%, var(--retro-pink) 0%, transparent 100%),
+    radial-gradient(circle 4px at 50% 80%, var(--yellow) 0%, transparent 100%),
+    radial-gradient(circle 6px at 20% 40%, var(--arcade-purple) 0%, transparent 100%),
+    radial-gradient(circle 4px at 70% 10%, var(--neon-blue) 0%, transparent 100%);
+  background-size: 200% 200%;
+  animation: pixelFloat 15s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.tetris-shapes {
+  position: absolute;
+  inset: 0;
+}
+
+.tetris-shapes::before,
+.tetris-shapes::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: var(--retro-pink);
+  border: 2px solid var(--yellow);
+  animation: tetrisSpin 8s linear infinite;
+}
+
+.tetris-shapes::before {
+  top: 15%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.tetris-shapes::after {
+  top: 60%;
+  right: 25%;
+  width: 16px;
+  height: 16px;
+  background: var(--neon-blue);
+  animation-duration: 6s;
+  animation-delay: -2s;
+}
+
+.stars {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 30px 50px, #fff, transparent),
+    radial-gradient(1px 1px at 100px 80px, var(--yellow), transparent),
+    radial-gradient(1px 1px at 200px 20px, #fff, transparent),
+    radial-gradient(1px 1px at 350px 150px, var(--neon-blue), transparent),
+    radial-gradient(1px 1px at 150px 200px, #fff, transparent);
+  background-size: 400px 300px;
+  animation: starsMove 20s linear infinite;
+  opacity: 0.8;
+}
+
+.geo-shapes {
+  position: absolute;
+  inset: 0;
+}
+
+.geo-shapes::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 60px;
+  height: 60px;
+  border: 3px solid var(--arcade-purple);
+  transform: rotate(0deg);
+  animation: geoRotate 12s linear infinite;
+  opacity: 0.5;
+}
+
+.geo-shapes::after {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  left: 15%;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--neon-blue);
+  border-radius: 50%;
+  animation: geoDrift 10s ease-in-out infinite;
+  opacity: 0.5;
+}
+
+@keyframes pixelFloat {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes tetrisSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes starsMove {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-300px); }
+}
+
+@keyframes geoRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes geoDrift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -20px); }
+}
+
+/* ============================================
+   Header — minimal height ~60px
+   ============================================ */
+.site-header {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 60px;
+  padding: 0.6rem 1.5rem;
+  border-bottom: 3px solid var(--neon-blue);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.site-header-arcade {
+  flex-direction: column;
+  text-align: center;
+  min-height: 60px;
+  padding: 0.5rem 1.5rem 0.6rem;
+  border-bottom: 4px solid var(--yellow);
+  box-shadow: 0 0 30px rgba(255, 230, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.header-sub {
+  font-size: 0.45rem;
+  color: var(--retro-pink);
+  letter-spacing: 0.2em;
+  margin-top: 0.2rem;
+  animation: blink 1s step-end infinite;
+}
+
+.header-insert-coin {
+  font-size: clamp(0.45rem, 2.2vw, 0.55rem);
+  letter-spacing: 0.35em;
+  text-shadow: 0 0 10px var(--retro-pink);
+}
+
+.header-player {
+  font-size: 0.4rem;
+  color: var(--neon-blue);
+  letter-spacing: 0.3em;
+  margin-top: 0.25rem;
+  opacity: 0.95;
+}
+
+@keyframes blink {
+  50% { opacity: 0.4; }
+}
+
+@keyframes arcadeFlicker {
+  0%, 90%, 100% { opacity: 1; }
+  92% { opacity: 0.97; }
+  95% { opacity: 1; }
+  97% { opacity: 0.98; }
+}
+
+@keyframes neonPulse {
+  0%, 100% { filter: drop-shadow(0 0 20px var(--neon-blue)); }
+  50% { filter: drop-shadow(0 0 28px var(--neon-blue)); }
+}
+
+.logo {
+  font-size: 1.25rem;
+  color: var(--yellow);
+  text-shadow: 0 0 20px var(--yellow), 0 0 40px var(--retro-pink);
+  letter-spacing: 0.2em;
+}
+
+.logo-cabinet {
+  font-size: clamp(1.4rem, 6vw, 2rem);
+  letter-spacing: 0.35em;
+  text-shadow: 0 0 25px var(--yellow), 0 0 50px var(--retro-pink), 0 0 80px rgba(255, 230, 0, 0.4);
+  line-height: 1.4;
+}
+
+.site-header nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.site-header nav a {
+  color: var(--neon-blue);
+  text-decoration: none;
+  font-size: 0.5rem;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.site-header nav a:hover {
+  color: var(--retro-pink);
+  text-shadow: 0 0 8px var(--retro-pink);
+}
+
+.site-header nav a:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Main content — wide arcade layout
+   ============================================ */
+main {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.25rem 20px 3rem;
+}
+
+/* ============================================
+   Arcade main — game list, wide layout
+   ============================================ */
+.arcade-main {
+  width: 100%;
+  max-width: min(100%, 1400px);
+  margin: 0 auto;
+  padding: 1rem 16px 1.5rem;
+  box-sizing: border-box;
+}
+
+/* CRT-style panel for main content on homepage */
+.arcade-crt {
+  position: relative;
+  padding: 1rem 1.5rem 1.5rem;
+  display: block;
+  text-align: center;
+}
+
+.arcade-crt::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.035) 2px,
+    rgba(0, 0, 0, 0.035) 4px
+  );
+  opacity: 0.55;
+  animation: arcadeFlicker 4s ease-in-out infinite;
+}
+
+.arcade-crt > * {
+  position: relative;
+  z-index: 1;
+}
+
+.arcade-title {
+  font-size: clamp(0.75rem, 4vw, 1.1rem);
+  color: var(--yellow);
+  text-align: center;
+  text-shadow: 0 0 30px var(--yellow), 0 0 60px rgba(255, 230, 0, 0.4), 0 2px 0 rgba(0, 0, 0, 0.5);
+  margin: 0.35rem 0 0.2rem;
+  letter-spacing: 0.15em;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.arcade-tagline {
+  text-align: center;
+  font-size: clamp(0.38rem, 1.8vw, 0.48rem);
+  color: var(--neon-blue);
+  margin: 0 0 0.25rem;
+  opacity: 0.95;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.arcade-era {
+  text-align: center;
+  font-size: clamp(0.35rem, 1.6vw, 0.45rem);
+  color: var(--retro-pink);
+  letter-spacing: 0.3em;
+  margin: 0 0 0.5rem;
+  opacity: 0.9;
+  text-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.games-list-primary {
+  margin: 1rem auto 0;
+  position: relative;
+  z-index: 1;
+  max-width: 480px;
+}
+
+.arcade-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 0.75rem;
+  justify-items: center;
+  align-items: stretch;
+  list-style: none;
+  padding: 0 0.5rem;
+  margin: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Homepage: 3×2 layout — row 1: games 1 2 3, row 2: games 4 5 6 */
+.games-grid.arcade-grid {
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+/* Arcade cabinet style cards — fit 3×2 grid, consistent border (no sticky highlight) */
+.game-card.arcade-card {
+  width: 100%;
+  max-width: 160px;
+  height: 100%;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem 0.75rem;
+  background: linear-gradient(180deg, rgba(30, 20, 50, 0.95) 0%, rgba(15, 15, 26, 0.98) 50%);
+  border: 4px solid var(--neon-blue);
+  border-radius: 6px;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s, box-shadow 0.25s, border-color 0.2s;
+  box-shadow: 0 0 0 3px var(--bg), 0 0 25px rgba(0, 212, 255, 0.25), 0 6px 0 rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card.arcade-card.playable {
+  border-color: var(--neon-blue);
+}
+
+.game-card.arcade-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border: 2px solid rgba(0, 212, 255, 0.5);
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.game-card-marquee {
+  display: block;
+  width: 100%;
+  padding: 0.4rem 0;
+  font-size: 0.32rem;
+  color: var(--yellow);
+  letter-spacing: 0.15em;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px var(--yellow);
+  border-bottom: 2px solid rgba(255, 230, 0, 0.4);
+}
+
+/* Hover only on devices that support hover — no sticky highlight on touch */
+@media (hover: hover) {
+  .game-card.arcade-card.playable:hover {
+    transform: translateY(-6px) scale(1.02);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 35px var(--neon-blue), 0 0 40px rgba(0, 212, 255, 0.25), 0 8px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .game-card.arcade-card.playable:hover .game-card-btn {
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3), 0 0 20px var(--neon-blue);
+    transform: scale(1.05);
+  }
+}
+
+/* Touch / no-hover: no transform so no card looks “stuck” selected */
+@media (hover: none) {
+  .game-card.arcade-card.playable:hover {
+    transform: none;
+    border-color: var(--neon-blue);
+  }
+}
+
+.game-card.arcade-card.playable:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+  border-color: var(--neon-blue);
+}
+
+.game-card.arcade-card.coming-soon {
+  border-color: #444;
+  opacity: 0.88;
+  cursor: default;
+}
+
+.game-card.arcade-card .game-card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.3rem;
+  filter: drop-shadow(0 0 10px rgba(255, 230, 0, 0.5));
+}
+
+.game-card-name {
+  font-size: clamp(0.4rem, 1.8vw, 0.52rem);
+  color: var(--yellow);
+  margin: 0 0 0.4rem;
+  text-shadow: 0 0 15px rgba(255, 230, 0, 0.7), 0 2px 0 rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.06em;
+  line-height: 1.4;
+}
+
+.game-card-btn {
+  display: inline-block;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.3rem;
+  color: var(--bg);
+  background: linear-gradient(180deg, var(--yellow) 0%, #ccb800 100%);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 4px;
+  letter-spacing: 0.12em;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 230, 0, 0.4);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.game-card-tag {
+  font-size: 0.4rem;
+  color: var(--neon-blue);
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
+}
+
+.game-card.arcade-card.coming-soon .game-card-btn {
+  background: #555;
+  color: #999;
+}
+
+.game-card.arcade-card.coming-soon .game-card-tag {
+  color: #888;
+}
+
+.arcade-section-title {
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+/* Legacy hero (if used elsewhere) */
+.hero { text-align: center; padding: 2rem 1rem; }
+.hero-floating-icons { position: absolute; inset: 0; pointer-events: none; }
+.float-icon { position: absolute; font-size: 2rem; opacity: 0.7; }
+.hero-title { font-size: 0.6rem; color: var(--yellow); margin: 0 0 1rem; }
+.hero-subtitle { font-size: 0.5rem; color: var(--neon-blue); margin: 0 0 1.5rem; }
+.btn-play {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  color: var(--bg);
+  background: var(--retro-pink);
+  border: 3px solid var(--yellow);
+  text-decoration: none;
+  box-shadow: 0 0 20px var(--retro-pink);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-play:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--yellow); }
+
+/* ============================================
+   Ad placeholders — present but unobtrusive
+   ============================================ */
+.ad-slot {
+  min-height: 60px;
+  border: 1px dashed rgba(106, 0, 255, 0.35);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.25rem 0;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.32rem;
+  letter-spacing: 0.08em;
+  background: rgba(0, 0, 0, 0.15);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.ad-slot:hover {
+  border-color: rgba(106, 0, 255, 0.5);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Inline/top ads removed — ads only on sides (160px columns) */
+.ad-slot-inline {
+  display: none !important;
+  margin: 0;
+  min-height: 0;
+  flex-shrink: 0;
+}
+
+.more-games {
+  margin-top: 1.25rem;
+  padding: 1rem 0;
+  border-top: 2px solid rgba(255, 230, 0, 0.3);
+}
+
+.more-games-title {
+  font-size: 0.5rem;
+  color: var(--yellow);
+  letter-spacing: 0.15em;
+  margin: 0 0 0.75rem;
+  text-align: center;
+  text-shadow: 0 0 12px rgba(255, 230, 0, 0.5);
+}
+
+.more-games-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+}
+
+.more-games-nav a {
+  font-size: 0.4rem;
+  color: var(--neon-blue);
+  text-decoration: none;
+  padding: 0.35rem 0.6rem;
+  border: 2px solid rgba(0, 212, 255, 0.4);
+  border-radius: 4px;
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.more-games-nav a:hover {
+  color: var(--yellow);
+  border-color: var(--yellow);
+  box-shadow: 0 0 12px rgba(255, 230, 0, 0.3);
+}
+
+.more-games-nav a:focus-visible {
+  outline: 2px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.ad-container {
+  min-height: 60px;
+  border: 1px dashed rgba(106, 0, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.25rem 0;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.32rem;
+  opacity: 0.7;
+}
+
+/* ============================================
+   Sections
+   ============================================ */
+.section {
+  margin: 3rem 0;
+}
+
+.section-title {
+  font-size: 0.6rem;
+  color: var(--neon-blue);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 15px var(--neon-blue);
+}
+
+/* ============================================
+   Game cards
+   ============================================ */
+.game-card {
+  background: rgba(106, 0, 255, 0.2);
+  border: 3px solid var(--arcade-purple);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 25px var(--neon-blue), 0 0 50px rgba(0, 212, 255, 0.2);
+}
+
+.game-card.coming-soon:hover {
+  box-shadow: 0 0 20px var(--arcade-purple);
+}
+
+.featured-card {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.game-card-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.game-card h3 {
+  font-size: 0.55rem;
+  color: var(--yellow);
+  margin: 0 0 0.5rem;
+}
+
+.game-card p {
+  font-size: 0.35rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 1rem;
+}
+
+.btn-play-small {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-pixel);
+  font-size: 0.4rem;
+  color: var(--bg);
+  background: var(--neon-blue);
+  border: 2px solid var(--yellow);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-play-small:hover:not(:disabled) {
+  background: var(--retro-pink);
+  transform: scale(1.05);
+}
+
+.btn-play-small:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   Games grid
+   ============================================ */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+
+.games-grid .game-card.small {
+  width: 100%;
+  max-width: 180px;
+  padding: 1rem;
+}
+
+.games-grid .game-card.small .game-card-icon {
+  font-size: 2rem;
+}
+
+.games-grid .game-card.small h3 {
+  font-size: 0.45rem;
+}
+
+/* ============================================
+   Footer — compact, ~20px padding
+   ============================================ */
+.site-footer {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 20px 1rem;
+  border-top: 3px solid var(--arcade-purple);
+  margin-top: 1rem;
+  box-shadow: 0 -4px 20px rgba(106, 0, 255, 0.15);
+}
+
+.site-footer-arcade {
+  padding: 20px 1rem;
+  border-top: 4px solid var(--yellow);
+  box-shadow: 0 -4px 25px rgba(255, 230, 0, 0.2);
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.site-footer nav a {
+  color: var(--neon-blue);
+  text-decoration: none;
+  font-size: 0.48rem;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.site-footer-arcade nav a {
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+}
+
+.site-footer nav a:hover {
+  color: var(--yellow);
+  text-shadow: 0 0 10px var(--yellow);
+}
+
+.footer-tagline {
+  font-size: 0.42rem;
+  color: var(--yellow);
+  opacity: 0.95;
+  margin: 0;
+  text-shadow: 0 0 12px rgba(255, 230, 0, 0.4);
+}
+
+.site-footer-arcade .footer-tagline {
+  font-size: 0.4rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+
+.footer-copy {
+  font-size: 0.32rem;
+  color: var(--retro-pink);
+  opacity: 0.85;
+  margin: 0.2rem 0 0;
+  letter-spacing: 0.15em;
+}
+
+/* ============================================
+   Home page — fit viewport
+   ============================================ */
+body.home-page {
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* No ads on homepage */
+body.home-page .ad-side {
+  display: none !important;
+}
+
+body.home-page main.arcade-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+body.home-page .arcade-crt {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  padding-top: 1.25rem;
+}
+
+body.home-page .games-list-primary {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  margin-top: 1.75rem;
+}
+
+body.home-page .arcade-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: visible;
+  align-content: center;
+  justify-content: center;
+  padding-top: 0.75rem;
+  padding-bottom: 0.5rem;
+}
+
+/* ============================================
+   Content pages (About, Privacy, Contact, Terms)
+   ============================================ */
+body.content-page {
+  min-height: 100vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.site-header-content {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  min-height: 60px;
+  padding: 0.6rem 1.5rem;
+  border-bottom: 3px solid var(--neon-blue);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+.site-header-content .logo {
+  font-size: clamp(0.9rem, 4vw, 1.1rem);
+  letter-spacing: 0.15em;
+  width: 100%;
+  text-align: center;
+}
+
+.site-header-content nav {
+  width: 100%;
+  justify-content: center;
+}
+
+.site-header-content .logo {
+  text-decoration: none;
+  color: var(--yellow);
+}
+
+.site-header-content .logo:hover {
+  color: var(--yellow);
+  text-shadow: 0 0 20px var(--yellow), 0 0 35px var(--retro-pink);
+}
+
+.site-header-content nav a {
+  font-size: 0.45rem;
+}
+
+.content-main {
+  position: relative;
+  z-index: 5;
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 20px 3rem;
+}
+
+.content-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 4px solid var(--neon-blue);
+  border-radius: 6px;
+  padding: 2rem;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 25px rgba(0, 212, 255, 0.15);
+}
+
+.content-title {
+  font-family: var(--font-pixel);
+  font-size: clamp(0.7rem, 3.5vw, 0.95rem);
+  color: var(--yellow);
+  text-align: center;
+  text-shadow: 0 0 20px var(--yellow), 0 0 40px rgba(255, 230, 0, 0.3);
+  margin: 0 0 1.5rem;
+  letter-spacing: 0.1em;
+}
+
+.content-body {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 2vw, 17px);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.content-body p {
+  margin: 0 0 1rem;
+}
+
+.content-body p:last-child {
+  margin-bottom: 0;
+}
+
+.content-body a {
+  color: var(--neon-blue);
+  text-decoration: none;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.content-body a:hover {
+  color: var(--yellow);
+  text-shadow: 0 0 10px var(--yellow);
+}
+
+.content-body strong {
+  color: var(--yellow);
+}
+
+.content-body h2 {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  color: var(--neon-blue);
+  margin: 1.5rem 0 0.5rem;
+  letter-spacing: 0.05em;
+}
+
+.content-body ul {
+  margin: 0.5rem 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.content-body li {
+  margin-bottom: 0.35rem;
+}
+
+.site-footer-content {
+  padding: 20px 1rem;
+  border-top: 3px solid var(--arcade-purple);
+  box-shadow: 0 -4px 20px rgba(106, 0, 255, 0.15);
+}
+
+.site-footer-content .footer-tagline {
+  font-size: 0.4rem;
+  margin-bottom: 0.25rem;
+}
+
+/* Game pages: fit viewport, no scroll — 160px ads each side, game in center */
+.snake-page.site-has-footer,
+body.snake-page,
+body.game-page {
+  overflow-x: hidden;
+}
+
+.snake-page.site-has-footer {
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  padding: 0.25rem 0;
+}
+
+.snake-page.site-has-footer > .snake-layout {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snake-page .site-footer-games {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+/* ============================================
+   SNAKE PAGE — same unified bg as homepage
+   ============================================ */
+.snake-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  padding: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.snake-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: min(100%, 1400px);
+  height: 100%;
+  max-height: 100%;
+  position: relative;
+  z-index: 5;
+  box-sizing: border-box;
+  padding: 0 8px;
+  min-width: 0;
+}
+
+.ad-side {
+  flex-shrink: 0;
+  width: 160px;
+  min-width: 160px;
+  align-self: stretch;
+  min-height: 120px;
+  border: 1px dashed rgba(106, 0, 255, 0.25);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.28rem;
+  letter-spacing: 0.06em;
+}
+
+.snake-wrapper {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  width: 100%;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 0.25rem;
+  padding: 0.3rem 0.6rem;
+  color: var(--neon-blue);
+  text-decoration: none;
+  font-size: 0.45rem;
+  letter-spacing: 0.06em;
+  transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+  flex-shrink: 0;
+  border: 2px solid rgba(0, 212, 255, 0.5);
+  border-radius: 4px;
+  background: rgba(0, 212, 255, 0.08);
+}
+
+.back-link:hover {
+  color: var(--yellow);
+  background: rgba(255, 230, 0, 0.12);
+  border-color: rgba(255, 230, 0, 0.6);
+  box-shadow: 0 0 12px rgba(255, 230, 0, 0.25);
+}
+
+.snake-title,
+.arcade-game-title {
+  font-size: clamp(0.6rem, 3vw, 0.85rem);
+  color: var(--yellow);
+  margin: 0 0 0.25rem;
+  text-shadow: 0 0 25px var(--yellow), 0 0 50px var(--retro-pink);
+  letter-spacing: 0.15em;
+  flex-shrink: 0;
+}
+
+.score-row {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.45rem;
+  color: var(--neon-blue);
+  flex-shrink: 0;
+}
+
+.arcade-scores .score-label {
+  text-shadow: 0 0 10px var(--neon-blue);
+  letter-spacing: 0.06em;
+}
+
+.score-current {
+  color: var(--neon-blue);
+}
+
+.score-high {
+  color: var(--yellow);
+  text-shadow: 0 0 12px var(--yellow);
+}
+
+.score-high span {
+  font-size: 1.1em;
+}
+
+/* Game area — viewport-based max so playfield gets space (like working old version) */
+.game-container {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: min(92vh, 960px);
+  max-width: min(96vw, 960px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 0.35rem;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Snake: square playfield, fits center column */
+.game-container-snake {
+  aspect-ratio: 1;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+}
+
+.game-container-snake #gameCanvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 0;
+  background: #0a0a12;
+  border: none;
+  box-shadow: none;
+  display: block;
+}
+
+.scanline-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+  opacity: 0.55;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: var(--lcd-bg);
+}
+
+.game-over-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: rgba(15, 15, 26, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  pointer-events: auto;
+}
+
+.game-over-overlay.hidden {
+  display: none !important;
+  pointer-events: none;
+}
+
+.game-over-overlay .game-over-box,
+.game-over-overlay .btn-play-again {
+  pointer-events: auto;
+}
+
+.game-over-box {
+  padding: 2.5rem 2.25rem;
+  border: 5px solid var(--retro-pink);
+  background: var(--bg);
+  color: #fff;
+  text-align: center;
+  min-width: 280px;
+  max-width: 90vw;
+}
+
+.arcade-gameover {
+  border-width: 6px;
+  box-shadow: 0 0 40px var(--retro-pink), inset 0 0 25px rgba(0, 0, 0, 0.5);
+  padding: 2.75rem 2.5rem;
+}
+
+.new-high-score-banner {
+  display: block;
+  font-size: 0.5rem;
+  color: var(--yellow);
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 15px var(--yellow), 0 0 30px var(--retro-pink);
+  margin-bottom: 1rem;
+  animation: bannerPulse 0.8s ease-in-out infinite;
+}
+
+.new-high-score-banner.hidden {
+  display: none;
+}
+
+@keyframes bannerPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.02); }
+}
+
+.arcade-gameover h2 {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  margin-bottom: 1rem;
+}
+
+.arcade-gameover p {
+  font-size: 0.48rem;
+  letter-spacing: 0.06em;
+  margin: 0.4rem 0;
+}
+
+.game-over-box h2 {
+  font-size: 0.7rem;
+  color: var(--retro-pink);
+  margin: 0 0 0.75rem;
+  text-shadow: 0 0 15px var(--retro-pink), 0 0 35px rgba(255, 0, 127, 0.5);
+}
+
+.game-over-box p {
+  font-size: 0.48rem;
+  margin: 0.4rem 0;
+}
+
+.btn-play-again {
+  margin-top: 1.25rem;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-pixel);
+  font-size: 0.48rem;
+  color: var(--bg);
+  background: var(--neon-blue);
+  border: 3px solid var(--yellow);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-play-again:hover {
+  background: var(--retro-pink);
+  transform: scale(1.05);
+}
+
+.btn-play-again:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+.game-over-box .hint {
+  font-size: 0.36rem;
+  opacity: 0.85;
+  margin-top: 0.75rem;
+}
+
+/* ============================================
+   Control pad
+   ============================================ */
+.control-pad {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.control-pad-row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.keys-hint {
+  font-size: 0.3rem;
+  color: var(--neon-blue);
+  opacity: 0.9;
+  margin: 0.35rem 0 0;
+  letter-spacing: 0.04em;
+}
+
+.keys-annotation {
+  font-size: clamp(0.4rem, 2vw, 0.55rem);
+  color: var(--yellow);
+  text-shadow: 0 0 10px rgba(255, 230, 0, 0.8);
+  margin: 0.2rem 0 0;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.5rem;
+  background: rgba(0, 212, 255, 0.12);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 230, 0, 0.35);
+  flex-shrink: 0;
+}
+
+/* Tetris: layout 360×720, arcade frame (same style as Flappy) — colors stay visible */
+.game-container-tetris {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: min(92vh, 1000px);
+  max-width: min(58vh, 96vw);
+  width: 100%;
+  aspect-ratio: 1 / 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 4px solid var(--yellow);
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 28px rgba(255, 230, 0, 0.35), inset 0 0 30px rgba(0, 0, 0, 0.3);
+  background: var(--bg);
+}
+
+.game-container-tetris #gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: #0a0a12;
+  border-radius: 4px;
+}
+
+.game-container-tetris .game-over-overlay {
+  z-index: 30;
+}
+
+/* Brick Breaker: arcade frame (same layout style as Flappy) */
+.game-container-brick {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: min(92vh, 1100px);
+  max-width: min(100%, 560px);
+  width: 100%;
+  aspect-ratio: 480 / 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 4px solid var(--yellow);
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 28px rgba(255, 230, 0, 0.35), inset 0 0 30px rgba(0, 0, 0, 0.3);
+  background: var(--bg);
+}
+
+.game-container-brick #gameCanvas {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.game-container-brick .game-over-overlay,
+.game-container-brick .retry-overlay {
+  z-index: 30;
+}
+
+/* Flappy Bird: fits center area, 400×600 ratio */
+.game-container-flappy {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 400 / 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid var(--yellow);
+  border-radius: 8px;
+  box-shadow: 0 0 0 2px var(--bg), 0 0 28px rgba(255, 230, 0, 0.35), inset 0 0 30px rgba(0, 0, 0, 0.3);
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-container-flappy #gameCanvas {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  border-radius: 4px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.game-container-flappy .game-over-overlay {
+  z-index: 30;
+}
+
+/* Hangman: arcade cabinet — same layout pattern, neon frame, scanline */
+.game-container-hangman {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: min(92vh, 820px);
+  max-width: min(100%, 520px);
+  width: 100%;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+  border: 4px solid var(--yellow);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 28px rgba(255, 230, 0, 0.35), inset 0 0 30px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(180deg, rgba(12, 10, 22, 0.98) 0%, rgba(8, 6, 18, 0.99) 100%);
+}
+
+.game-container-hangman::before {
+  content: 'GUESS THE WORD';
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-pixel);
+  font-size: 0.38rem;
+  letter-spacing: 0.25em;
+  color: var(--yellow);
+  text-shadow: 0 0 12px var(--yellow);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.game-container-hangman::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+  opacity: 0.5;
+}
+
+.game-container-hangman .game-over-overlay {
+  z-index: 30;
+}
+
+.hangman-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 0;
+  overflow: hidden;
+  flex: 1 1 auto;
+  position: relative;
+  z-index: 1;
+  justify-content: center;
+}
+
+.hangman-area #hangmanCanvas {
+  flex-shrink: 1;
+  width: 280px;
+  height: 308px;
+  max-width: min(100%, 280px);
+  max-height: 42vh;
+  background: #0a0a12;
+  border-radius: 8px;
+  border: 4px solid var(--neon-blue);
+  box-shadow:
+    0 0 20px rgba(0, 212, 255, 0.4),
+    0 0 40px rgba(0, 212, 255, 0.15),
+    inset 0 0 0 1px rgba(0, 212, 255, 0.3);
+  image-rendering: pixelated;
+}
+
+/* Word display — big arcade letters */
+.word-display {
+  font-size: clamp(0.85rem, 4.5vw, 1.15rem);
+  font-weight: bold;
+  letter-spacing: 0.4em;
+  min-height: 2em;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 8px;
+  border: 4px solid var(--yellow);
+  box-shadow:
+    0 0 20px rgba(255, 230, 0, 0.35),
+    inset 0 0 30px rgba(0, 0, 0, 0.5);
+  flex-shrink: 0;
+  font-family: var(--font-pixel);
+  text-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+}
+
+.letter-show {
+  color: var(--neon-blue);
+  text-shadow: 0 0 12px var(--neon-blue), 0 0 25px rgba(0, 212, 255, 0.5);
+}
+
+.letter-hide {
+  color: var(--yellow);
+  text-shadow: 0 0 10px var(--yellow), 0 0 20px rgba(255, 230, 0, 0.4);
+  font-weight: bold;
+}
+
+.letters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+/* Arcade letter buttons — neon keys */
+.letter-btn {
+  font-family: var(--font-pixel);
+  font-size: 0.6rem;
+  padding: 0.5rem 0.55rem;
+  min-width: 2.4em;
+  min-height: 2.4em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(20, 15, 35, 0.98) 0%, rgba(10, 8, 22, 0.99) 100%);
+  border: 3px solid var(--neon-blue);
+  color: var(--yellow);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+  text-shadow: 0 0 12px rgba(255, 230, 0, 0.8);
+  box-shadow:
+    0 0 15px rgba(0, 212, 255, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.05em;
+  border-radius: 4px;
+}
+
+.letter-btn:hover:not(.used) {
+  background: rgba(0, 212, 255, 0.15);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5), 0 0 35px rgba(0, 212, 255, 0.2);
+  border-color: var(--yellow);
+  transform: scale(1.05);
+}
+
+.letter-btn.used {
+  opacity: 0.4;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 230, 0, 0.4);
+  cursor: default;
+  box-shadow: none;
+}
+
+.letter-btn.key-press {
+  transform: scale(0.95);
+  box-shadow: 0 0 18px var(--yellow);
+}
+
+/* Memory: arcade cabinet — MATCH PAIRS label, neon cards, scanline */
+.game-container-memory {
+  flex: 1 1 auto;
+  min-height: 0;
+  max-width: min(100%, 600px);
+  max-height: min(92vh, 720px);
+  width: 100%;
+  padding: 1.25rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border-radius: 8px;
+  border: 4px solid var(--yellow);
+  box-shadow: 0 0 0 2px var(--bg), 0 0 28px rgba(255, 230, 0, 0.35), inset 0 0 30px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(180deg, rgba(12, 10, 22, 0.98) 0%, rgba(8, 6, 18, 0.99) 100%);
+}
+
+.game-container-memory::before {
+  content: 'MATCH PAIRS';
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-pixel);
+  font-size: 0.38rem;
+  letter-spacing: 0.2em;
+  color: var(--yellow);
+  text-shadow: 0 0 12px var(--yellow), 0 0 24px rgba(255, 230, 0, 0.5);
+  opacity: 0.95;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.game-container-memory .game-over-overlay {
+  z-index: 30;
+}
+
+.game-container-memory::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.05) 2px,
+    rgba(0, 0, 0, 0.05) 4px
+  );
+  opacity: 0.55;
+}
+
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0.75rem;
+  position: relative;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.4);
+}
+
+.memory-grid.memory-grid-large {
+  max-width: 580px;
+  gap: 0.5rem;
+}
+
+.memory-grid.memory-grid-large .memory-card {
+  font-size: 1.5rem;
+}
+
+.memory-card {
+  aspect-ratio: 1;
+  border: 3px solid var(--neon-blue);
+  background: linear-gradient(145deg, rgba(25, 30, 55, 0.98) 0%, rgba(12, 15, 28, 0.99) 50%);
+  color: var(--yellow);
+  font-family: var(--font-pixel);
+  font-size: 1.85rem;
+  cursor: pointer;
+  position: relative;
+  border-radius: 8px;
+  transition: transform 0.15s, box-shadow 0.2s, border-color 0.2s;
+  text-shadow: 0 0 12px rgba(255, 230, 0, 0.7);
+  box-shadow: 0 0 16px rgba(0, 212, 255, 0.3), inset 0 2px 0 rgba(255, 255, 255, 0.12), inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.memory-card .back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 1.4rem;
+  color: rgba(0, 212, 255, 0.9);
+  text-shadow: 0 0 14px rgba(0, 212, 255, 0.6);
+  background: linear-gradient(145deg, rgba(15, 20, 40, 0.95) 0%, rgba(8, 10, 22, 0.98) 100%);
+  border: 2px dashed rgba(0, 212, 255, 0.4);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.memory-card .front {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+}
+
+.memory-card:hover:not(.matched) {
+  transform: scale(1.04);
+  border-color: var(--yellow);
+  box-shadow: 0 0 24px rgba(255, 230, 0, 0.5), 0 0 40px rgba(0, 212, 255, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.15);
+}
+
+.memory-card .front {
+  display: none;
+}
+
+.memory-card.flipped .back {
+  display: none;
+}
+
+.memory-card.flipped .front {
+  display: flex;
+}
+
+.memory-card.matched {
+  border-color: var(--yellow);
+  box-shadow: 0 0 20px rgba(255, 230, 0, 0.6), 0 0 32px rgba(255, 230, 0, 0.25), inset 0 0 20px rgba(255, 230, 0, 0.15);
+  opacity: 1;
+  pointer-events: none;
+  text-shadow: 0 0 16px var(--yellow), 0 0 28px rgba(255, 230, 0, 0.6);
+}
+
+.pad-row {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+}
+
+.pad-btn {
+  width: 52px;
+  height: 52px;
+  font-family: var(--font-pixel);
+  font-size: 1.1rem;
+  color: #fff;
+  background: linear-gradient(180deg, #6060c0 0%, #4040a0 100%);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow:
+    0 3px 0 #303070,
+    0 5px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.08s, box-shadow 0.08s, filter 0.1s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pad-btn.up {
+  background: linear-gradient(180deg, #00c850 0%, #008030 100%);
+  box-shadow: 0 3px 0 #005020, 0 5px 10px rgba(0, 0, 0, 0.35);
+}
+.pad-btn.down {
+  background: linear-gradient(180deg, #00c850 0%, #008030 100%);
+  box-shadow: 0 3px 0 #005020, 0 5px 10px rgba(0, 0, 0, 0.35);
+}
+.pad-btn.left {
+  background: linear-gradient(180deg, #00b4d4 0%, #0077a0 100%);
+  box-shadow: 0 3px 0 #005570, 0 5px 10px rgba(0, 0, 0, 0.35);
+}
+.pad-btn.right {
+  background: linear-gradient(180deg, #00b4d4 0%, #0077a0 100%);
+  box-shadow: 0 3px 0 #005570, 0 5px 10px rgba(0, 0, 0, 0.35);
+}
+.pad-btn.rotate {
+  background: linear-gradient(180deg, #ff6b9d 0%, #c44569 100%);
+  box-shadow: 0 3px 0 #8b2d4a, 0 5px 10px rgba(0, 0, 0, 0.35);
+  font-size: 1rem;
+  flex-direction: column;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.05rem;
+  line-height: 1.1;
+}
+.pad-rotate-icon { font-size: 1rem; }
+.pad-rotate-key { font-size: 0.65rem; opacity: 0.95; }
+
+.pad-btn:active:not(:disabled),
+.pad-btn.key-press {
+  transform: translateY(2px) scale(0.96);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
+  filter: brightness(1.15);
+}
+
+.pad-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.pad-btn.pressed {
+  transform: translateY(2px) scale(0.96);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* Snake: smaller, arcade-cabinet style D-pad */
+.snake-page .control-pad {
+  gap: 0.15rem;
+}
+
+.snake-page .pad-btn {
+  width: 38px;
+  height: 38px;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #3a3a4a 0%, #1e1e28 100%);
+  border: 1px solid #555;
+  box-shadow: 0 2px 0 #2a2a35, inset 0 1px 0 rgba(255,255,255,0.08);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.snake-page .pad-btn.up,
+.snake-page .pad-btn.down {
+  background: linear-gradient(180deg, #2d4a2d 0%, #1a301a 100%);
+  border-color: #3a6b3a;
+  box-shadow: 0 2px 0 #152515, inset 0 1px 0 rgba(255,255,255,0.1);
+}
+
+.snake-page .pad-btn.left,
+.snake-page .pad-btn.right {
+  background: linear-gradient(180deg, #2d3a4a 0%, #1a2430 100%);
+  border-color: #3a4a6b;
+  box-shadow: 0 2px 0 #151925, inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.snake-page .pad-btn.center {
+  width: 28px;
+  height: 28px;
+  font-size: 0.5rem;
+}
+
+.snake-page .pad-row {
+  gap: 0.15rem;
+}
+
+.snake-page .pad-btn:active:not(:disabled),
+.snake-page .pad-btn.key-press {
+  box-shadow: 0 0 0 #2a2a35, inset 0 1px 2px rgba(0,0,0,0.4);
+}
+
+/* Brick Breaker: arcade-cabinet style keys, compact */
+.brick-breaker-page .control-pad-row {
+  gap: 0.2rem;
+}
+
+.brick-breaker-page .pad-btn {
+  width: 40px;
+  height: 40px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #2a2a3a 0%, #16161e 100%);
+  border: 1px solid #444;
+  box-shadow: 0 2px 0 #1a1a22, inset 0 1px 0 rgba(255,255,255,0.06);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.brick-breaker-page .pad-btn.left {
+  background: linear-gradient(180deg, #2d3a4a 0%, #1a2430 100%);
+  border-color: #00d4ff;
+  box-shadow: 0 2px 0 #151925, 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+.brick-breaker-page .pad-btn.right {
+  background: linear-gradient(180deg, #2d3a4a 0%, #1a2430 100%);
+  border-color: #00d4ff;
+  box-shadow: 0 2px 0 #151925, 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+.brick-breaker-page .pad-btn:active:not(:disabled),
+.brick-breaker-page .pad-btn.key-press {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 0 0 #151925, 0 0 14px rgba(0, 212, 255, 0.35), inset 0 1px 2px rgba(0,0,0,0.4);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+/* Game pages: softer background so gameplay pops */
+.game-page .bg-animations .pixel-blocks,
+.game-page .bg-animations .tetris-shapes,
+.game-page .bg-animations .stars,
+.game-page .bg-animations .geo-shapes {
+  opacity: 0.32;
+}
+
+.game-page .bg-animations .pixel-blocks {
+  opacity: 0.28;
+}
+
+@media (max-width: 600px) {
+  .hero-title {
+    font-size: 0.5rem;
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .games-grid.arcade-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .pad-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 1rem;
+  }
+
+  .pad-btn.rotate {
+    font-size: 0.9rem;
+  }
+
+  #gameCanvas {
+    max-width: 100%;
+  }
+
+  .ad-side {
+    display: none;
+  }
+}
+
+@media (max-width: 820px) {
+  .ad-side {
+    width: 80px;
+    min-width: 80px;
+    min-height: 120px;
+    font-size: 0.24rem;
+  }
+}
+
+/* Content pages: mobile */
+@media (max-width: 600px) {
+  .site-header,
+  .site-header-arcade {
+    padding: 0.5rem 1rem;
+    min-height: 52px;
+  }
+  .site-header-content {
+    gap: 0.4rem 0.75rem;
+    padding: 0.5rem 1rem;
+    min-height: 52px;
+  }
+  .site-header-content .logo {
+    font-size: 0.7rem;
+  }
+  .site-header-content nav a {
+    font-size: 0.4rem;
+  }
+  .content-main {
+    padding: 1.25rem 1rem 2rem;
+  }
+  .content-box {
+    padding: 1.25rem;
+  }
+  .content-title {
+    font-size: 0.65rem;
+  }
+  .content-body {
+    font-size: 14px;
+  }
+  .site-footer,
+  .site-footer-arcade,
+  .site-footer-content {
+    padding: 16px 1rem;
+  }
+}
